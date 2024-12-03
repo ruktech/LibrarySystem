@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Authors\" />
-    <Folder Include="Members\" />
-    <Folder Include="Borrowings\" />
+    <ProjectReference Include="..\LibrarySystem.Utils\LibrarySystem.Utils.csproj" />
   </ItemGroup>
 
 </Project>

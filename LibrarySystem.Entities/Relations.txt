@@ -1,0 +1,13 @@
+﻿Library System Relation Overview:
+==================================
+
+Books and Authors (Many-to-Many) :
+----------------------------------
+A book can have multiple authors.
+An author can write multiple books.
+
+
+Library Members and Borrowed Books (One-to-Many) :
+--------------------------------------------------
+A library member can borrow multiple books.
+A book can only be borrowed by one member at a time.
