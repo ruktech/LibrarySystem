@@ -76,7 +76,7 @@ namespace LibrarySystem.Mvc.Controllers
                 var borrowing = _mapper.Map<Borrowing>(borrowingCreateVM);
 
                 // Create a private method to check if copies are above 0 , then decrement by one
-                if (!await UpdateBookCopies(borrowingCreateVM.BookId))
+                if (!await DecrementCopiesAvailable(borrowingCreateVM.BookId))
                 {
                     ModelState.AddModelError("BookId", "The selected book is not available for borrowing.");
                     borrowingCreateVM.BookLookup = new SelectList(_context.Books, "Id", "Title");
@@ -181,9 +181,16 @@ namespace LibrarySystem.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var borrowing = await _context.Borrowings.FindAsync(id);
+            //var borrowing = await _context.Borrowings.FindAsync(id);
+            var borrowing = await _context.Borrowings
+                                                .Include(b => b.Book) // Include the Book entity
+                                                .FirstOrDefaultAsync(b => b.Id == id);
+
             if (borrowing != null)
             {
+                // Increment the book CopiesAvailable
+                await IncrementCopiesAvailable(borrowing.BookId);
+
                 _context.Borrowings.Remove(borrowing);
             }
 
@@ -199,7 +206,7 @@ namespace LibrarySystem.Mvc.Controllers
             return _context.Borrowings.Any(e => e.Id == id);
         }
 
-        private async Task<bool> UpdateBookCopies(int bookId)
+        private async Task<bool> DecrementCopiesAvailable(int bookId)
         {
             // Find the book
             var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
@@ -217,6 +224,17 @@ namespace LibrarySystem.Mvc.Controllers
             _context.Books.Update(book);
 
             return true;
+        }
+
+        private async Task IncrementCopiesAvailable(int bookId)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
+
+            if (book != null)
+            {
+                book.CopiesAvailable++;
+                _context.Books.Update(book);
+            }
         }
 
 

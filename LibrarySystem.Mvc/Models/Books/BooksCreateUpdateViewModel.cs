@@ -9,7 +9,11 @@ namespace LibrarySystem.Mvc.Models.Books
         public int Id { get; set; }
         public string Title { get; set; }
         public string ISBN { get; set; }
+
+        [Display(Name = "Publish Date")]
         public DateTime PublishDate { get; set; }
+
+        [Display(Name = "Avialable Copies")]
         public int CopiesAvailable { get; set; }
 
         [Display(Name = "Authors")]

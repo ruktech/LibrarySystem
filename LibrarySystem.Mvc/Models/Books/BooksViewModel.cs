@@ -8,6 +8,8 @@ namespace LibrarySystem.Mvc.Models.Books
     {
         public int Id { get; set; }
         public string Title { get; set; }
+
+        [Display(Name = "Avialable Copies")]
         public int CopiesAvailable { get; set; }
     }
 }

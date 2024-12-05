@@ -14,6 +14,8 @@ namespace LibrarySystem.Mvc.Models.Members
 
         [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
+
+        [Display(Name = "Member Since")]
         public DateTime MembershipDate { get; set; }
     }
 }
