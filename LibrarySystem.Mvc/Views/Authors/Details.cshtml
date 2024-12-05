@@ -1,0 +1,35 @@
+﻿@using LibrarySystem.Mvc.Models.Authors
+@model AuthorsDetailsViewModel
+
+@{
+    ViewData["Title"] = "Author Details";
+}
+
+<h1>Author Details - <span class="text-primary">@Model.FullName</span></h1>
+<hr />
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to Authors List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary ms-2">Edit</a>
+</div>

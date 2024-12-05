@@ -1,0 +1,78 @@
+﻿@using LibrarySystem.Mvc.Models.Books
+@model BooksDetailsViewModel
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h1>Book Details - <span class="text-primary">@Model.Title</span></h1>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublishDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CopiesAvailable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CopiesAvailable)
+        </dd>
+    </dl>
+</div>
+
+<hr />
+
+<h3>Authors</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Authors[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Authors[0].BirthDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model.Authors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => author.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => author.BirthDate)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@author.Id" asp-controller="Authors" class="text-decoration-none ms-2 text-info" title="Details">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="mt-5">
+    <a asp-action="Index" class="btn btn-secondary">Back to Books List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary ms-2">Edit</a>
+</div>

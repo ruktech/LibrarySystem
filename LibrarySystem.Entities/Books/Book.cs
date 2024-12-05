@@ -19,7 +19,7 @@ namespace LibrarySystem.Entities.Books
         [StringLength(255)]
         public string Title { get; set; }
 
-        [MaxLength(13), Required]
+        [MaxLength(16), Required]
         public string ISBN { get; set; }
 
         [Required]
